@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-test-pack:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore .\CcbStack.slnx
+
+      - name: Build (Release)
+        run: dotnet build .\CcbStack.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test .\CcbStack.slnx --configuration Release --no-build --verbosity normal
+
+      - name: Pack the global tool
+        run: dotnet pack .\src\CcbStack.Cli\CcbStack.Cli.csproj --configuration Release --no-build --output .\artifacts\nupkg
+
+      # Installs into an isolated, runner-local tool path via --tool-path rather than
+      # `--global`, so this never touches a real global tool installation.
+      - name: Smoke test - install and run from an isolated tool path
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $toolPath = Join-Path $env:RUNNER_TEMP "ccbstack-tool"
+          New-Item -ItemType Directory -Path $toolPath -Force | Out-Null
+
+          dotnet tool install --tool-path $toolPath --add-source .\artifacts\nupkg --prerelease CcbStack.Cli
+          if ($LASTEXITCODE -ne 0) {
+              throw "dotnet tool install failed with exit code $LASTEXITCODE"
+          }
+
+          $exe = Join-Path $toolPath "ccbstack.exe"
+
+          & $exe version
+          if ($LASTEXITCODE -ne 0) {
+              throw "ccbstack version failed with exit code $LASTEXITCODE"
+          }
+
+          & $exe config --json
+          if ($LASTEXITCODE -ne 0) {
+              throw "ccbstack config --json failed with exit code $LASTEXITCODE"
+          }
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ccbstack-nupkg
+          path: .\artifacts\nupkg\*.nupkg

@@ -1,0 +1,27 @@
+using Spectre.Console.Cli;
+
+namespace CcbStack.Cli.DependencyInjection;
+
+/// <summary>Resolves command instances from the built <see cref="IServiceProvider"/> for Spectre.Console.Cli.</summary>
+public sealed class TypeResolver : ITypeResolver, IDisposable
+{
+    private readonly IServiceProvider _provider;
+
+    public TypeResolver(IServiceProvider provider)
+    {
+        _provider = provider;
+    }
+
+    public object? Resolve(Type? type)
+    {
+        return type is null ? null : _provider.GetService(type);
+    }
+
+    public void Dispose()
+    {
+        if (_provider is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
+    }
+}

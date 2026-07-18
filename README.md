@@ -6,9 +6,9 @@ This project is being built independently, using gstack as a design reference.
 
 ## Status
 
-ccbstack is in its initial bootstrap stage. The only implemented command today is
-`ccbstack version`. See `CLAUDE.md` for the full planned command roadmap and
-development conventions.
+ccbstack is in its initial bootstrap stage. The implemented commands today are
+`ccbstack version` and `ccbstack config`. See `CLAUDE.md` for the full planned command
+roadmap and development conventions.
 
 ## Building the solution
 
@@ -21,6 +21,8 @@ dotnet build .\CcbStack.slnx
 ```powershell
 dotnet run --project .\src\CcbStack.Cli -- version
 dotnet run --project .\src\CcbStack.Cli -- version --format json
+dotnet run --project .\src\CcbStack.Cli -- config
+dotnet run --project .\src\CcbStack.Cli -- config --json
 ```
 
 ## Running the tests
@@ -36,6 +38,18 @@ dotnet pack .\src\CcbStack.Cli\CcbStack.Cli.csproj -c Release -o .\artifacts\nup
 ```
 
 This produces `CcbStack.Cli.<version>.nupkg` in `.\artifacts\nupkg`.
+
+### Using the build script
+
+`build.ps1` runs restore, build, test, and pack in one step, placing the package in a local
+NuGet feed directory (`.\artifacts\local-feed` by default):
+
+```powershell
+.\build.ps1
+.\build.ps1 -Configuration Release -LocalFeed .\artifacts\local-feed
+```
+
+It fails immediately on the first failing step and is safe to run repeatedly.
 
 ## Installing as a global .NET tool
 
@@ -59,7 +73,27 @@ dotnet tool update --global CcbStack.Cli --add-source .\artifacts\nupkg --prerel
 ```powershell
 ccbstack version
 ccbstack version --format json
+ccbstack config
+ccbstack config --json
 ```
+
+### The `config` command
+
+`ccbstack config` displays the effective configuration, merged from (lowest to highest
+precedence): built-in defaults, `%USERPROFILE%\.ccbstack\config.json`,
+`<project-root>\.ccbstack\config.json`, `CCBSTACK_*` environment variables, and command-line
+overrides. A "Runtime Environment" section shows resolved `pwsh`/`git`/`claude` executable
+paths — this is informational, not configuration.
+
+Temporary, non-persisted overrides can be supplied on the command line (mutually exclusive):
+
+```powershell
+ccbstack config --config-json '{ "defaultModel": "sonnet" }'
+ccbstack config --config-file .\temporary-config.json
+```
+
+`ccbstack config` does not yet support reading or writing individual keys (`config get`/
+`config set`) — that is planned for a future milestone.
 
 ## Uninstalling the global tool
 

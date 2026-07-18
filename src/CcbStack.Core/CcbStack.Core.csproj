@@ -7,4 +7,11 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Abstractions only: lets Core expose an IServiceCollection extension method for
+         registering configuration services without depending on a concrete container or on
+         Spectre.Console.Cli. -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+  </ItemGroup>
+
 </Project>

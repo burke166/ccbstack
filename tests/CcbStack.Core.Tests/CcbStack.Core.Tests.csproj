@@ -9,6 +9,10 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <!-- Pinned to the last release before FluentAssertions 8's commercial license change. -->
+    <PackageReference Include="FluentAssertions" Version="7.0.0" />
+    <!-- Concrete container, needed only to build a real ServiceCollection for DI-registration tests. -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
