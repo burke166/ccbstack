@@ -6,6 +6,7 @@ using Spectre.Console.Testing;
 
 namespace CcbStack.Cli.Tests.Output;
 
+[Collection(CcbStack.Cli.Tests.TestSupport.ConsoleRedirectionCollection.Name)]
 public class ConsoleCommandOutputTests
 {
     private readonly TestConsole _testConsole = new();

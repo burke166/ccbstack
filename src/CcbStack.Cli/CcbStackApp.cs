@@ -1,7 +1,10 @@
 using CcbStack.Cli.Commands;
+using CcbStack.Cli.Commands.Repo;
 using CcbStack.Cli.DependencyInjection;
 using CcbStack.Cli.Output;
+using CcbStack.Core.Checks;
 using CcbStack.Core.Configuration;
+using CcbStack.Core.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -43,6 +46,16 @@ public static class CcbStackApp
 
         config.AddCommand<ConfigCommand>("config")
             .WithDescription("Displays the effective ccbstack configuration.");
+
+        config.AddBranch("repo", repo =>
+        {
+            repo.SetDescription("Repository inspection commands.");
+            repo.AddCommand<RepoInspectCommand>("inspect")
+                .WithDescription("Displays repository intelligence: git status, languages, .NET/Go/PowerShell detection, and application classification.");
+        });
+
+        config.AddCommand<DoctorCommand>("doctor")
+            .WithDescription("Runs basic repository health checks.");
     }
 
     /// <summary>
@@ -58,6 +71,8 @@ public static class CcbStackApp
         var services = new ServiceCollection();
 
         services.AddCcbStackConfiguration();
+        services.AddCcbStackRepositoryAnalysis();
+        services.AddCcbStackDoctorChecks();
 
         services.AddSingleton<IAnsiConsole>(AnsiConsole.Console);
         services.AddSingleton<ICommandOutput, ConsoleCommandOutput>();

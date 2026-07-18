@@ -10,6 +10,7 @@ namespace CcbStack.Cli.Tests;
 /// example, a service that resolves fine under Spectre's implicit default registrar but is
 /// missing from <see cref="CcbStackApp"/>'s explicit DI registrations.
 /// </summary>
+[Collection(TestSupport.ConsoleRedirectionCollection.Name)]
 public class CcbStackAppTests
 {
     [Fact]
@@ -32,6 +33,28 @@ public class CcbStackAppTests
         // A real end-to-end run against this machine's actual environment/filesystem should
         // never throw or hit the unexpected-error path; it may legitimately fail validation
         // (3) if this machine happens to have an invalid real user/project config file.
+        exitCode.Should().NotBe(CcbStackExitCodes.UnexpectedError);
+    }
+
+    [Fact]
+    public void Create_ResolvesAndRunsRepoInspectCommand_WithoutThrowing()
+    {
+        var app = CcbStackApp.Create();
+
+        var exitCode = RunSilently(app, "repo", "inspect", "--json");
+
+        exitCode.Should().Be(0);
+    }
+
+    [Fact]
+    public void Create_ResolvesAndRunsDoctorCommand_WithoutThrowing()
+    {
+        var app = CcbStackApp.Create();
+
+        var exitCode = RunSilently(app, "doctor", "--json");
+
+        // May legitimately report exit code 1 (a check failed) depending on the machine's
+        // real working-tree state; it must never hit the unexpected-error path.
         exitCode.Should().NotBe(CcbStackExitCodes.UnexpectedError);
     }
 

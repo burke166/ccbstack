@@ -13,6 +13,7 @@ using Spectre.Console.Testing;
 
 namespace CcbStack.Cli.Tests.Commands;
 
+[Collection(TestSupport.ConsoleRedirectionCollection.Name)]
 public class ConfigCommandTests
 {
     [Fact]
