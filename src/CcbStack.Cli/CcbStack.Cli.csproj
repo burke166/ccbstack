@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CcbStack.Core\CcbStack.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console.Cli" Version="0.55.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- .NET tool packaging: installs and runs as `dotnet ccbstack <command>`. -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>dotnet-ccbstack</ToolCommandName>
+    <Description>ccbstack command-line tool: a Windows-first, agentic software-development framework for .NET, Go, PowerShell, and related tools.</Description>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CcbStack.Cli/CcbStack.Cli.csproj" />
+    <Project Path="src/CcbStack.Core/CcbStack.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CcbStack.Cli.Tests/CcbStack.Cli.Tests.csproj" />
+    <Project Path="tests/CcbStack.Core.Tests/CcbStack.Core.Tests.csproj" />
+  </Folder>
+</Solution>

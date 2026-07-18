@@ -1,0 +1,19 @@
+<Project>
+
+  <!--
+    Shared metadata for all ccbstack projects.
+
+    Centralizing the package version here keeps CcbStack.Core's assembly
+    version and CcbStack.Cli's package version in sync, since
+    VersionInfoProvider (in CcbStack.Core) reports its own assembly's
+    informational version as the ccbstack application version.
+  -->
+
+  <PropertyGroup>
+    <Version>0.1.0-alpha.1</Version>
+    <Authors>Chris Burke</Authors>
+    <Copyright>Copyright (c) 2026 Chris Burke</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>
