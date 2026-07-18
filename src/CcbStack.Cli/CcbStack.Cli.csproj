@@ -16,9 +16,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- .NET tool packaging: installs and runs as `dotnet ccbstack <command>`. -->
+    <!-- .NET tool packaging: installs as a global tool and runs as `ccbstack <command>`. -->
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>dotnet-ccbstack</ToolCommandName>
+    <ToolCommandName>ccbstack</ToolCommandName>
     <Description>ccbstack command-line tool: a Windows-first, agentic software-development framework for .NET, Go, PowerShell, and related tools.</Description>
   </PropertyGroup>
 

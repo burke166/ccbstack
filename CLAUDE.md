@@ -9,7 +9,7 @@ It consists of:
 1. A .NET command-line tool invoked as:
 
    ```powershell
-   dotnet ccbstack <command>
+   ccbstack <command>
    ```
 
 2. A collection of reusable AI development skills, including specification, planning, review, testing, investigation, QA, safety, release, and learning workflows.
@@ -35,20 +35,20 @@ Do not attempt to implement the entire planned ccbstack feature set in one pass.
 The initial command roadmap includes:
 
 ```text
-dotnet ccbstack version
-dotnet ccbstack repo inspect
-dotnet ccbstack doctor
-dotnet ccbstack skills validate
-dotnet ccbstack skills render
-dotnet ccbstack safety check
-dotnet ccbstack freeze
-dotnet ccbstack unfreeze
-dotnet ccbstack check
-dotnet ccbstack affected
-dotnet ccbstack config
-dotnet ccbstack docs check
-dotnet ccbstack learn
-dotnet ccbstack release
+ccbstack version
+ccbstack repo inspect
+ccbstack doctor
+ccbstack skills validate
+ccbstack skills render
+ccbstack safety check
+ccbstack freeze
+ccbstack unfreeze
+ccbstack check
+ccbstack affected
+ccbstack config
+ccbstack docs check
+ccbstack learn
+ccbstack release
 ```
 
 The planned skills, in approximate priority order, are:
@@ -298,15 +298,15 @@ Use Spectre.Console.Cli for the command hierarchy and parsing.
 Commands should be organized so the intended invocation remains:
 
 ```powershell
-dotnet ccbstack <command>
+ccbstack <command>
 ```
 
 Nested commands should follow the planned hierarchy, for example:
 
 ```powershell
-dotnet ccbstack repo inspect
-dotnet ccbstack skills validate
-dotnet ccbstack safety check
+ccbstack repo inspect
+ccbstack skills validate
+ccbstack safety check
 ```
 
 Command settings should:
@@ -535,7 +535,7 @@ The first bootstrap task should establish:
 
 * a working Spectre.Console.Cli application
 * the root `ccbstack` command
-* `dotnet ccbstack version`
+* `ccbstack version`
 * a reusable core version result
 * human-readable version output
 * a basic structured-output path if included in the task
