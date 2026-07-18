@@ -28,6 +28,10 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
+# Local .NET tool manifest (ccbstack is installed as a global tool; this repo doesn't use one)
+dotnet-tools.json
+.config/dotnet-tools.json
+
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 
