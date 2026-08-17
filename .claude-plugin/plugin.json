@@ -1,0 +1,9 @@
+{
+  "name": "ccbstack",
+  "description": "Reusable Claude Code skills for a consistent, design-first software development workflow across repositories, languages, and project types.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Christopher Burke",
+    "email": "chris@computercodeblue.com"
+  }
+}
