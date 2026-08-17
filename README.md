@@ -27,7 +27,8 @@ A .NET web application, Go command-line utility, Hugo site, and WordPress theme 
 
 ccbstack is in early development.
 
-The initial focus is repository initialization and adoption through two skills:
+Two skills are implemented and tested against all six initial project families
+(C#/.NET, Go, Hugo, Svelte, WordPress themes, static HTML5):
 
 * `init-repo` — creates and scaffolds a new repository.
 * `adopt-repo` — examines an existing repository and brings it into the ccbstack workflow.
