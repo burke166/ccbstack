@@ -17,8 +17,11 @@ All notable changes to this project are documented here. The format follows
   `CHANGELOG.md`, `docs/design/`, and `.gitignore` — preserving intentional
   existing conventions and flagging discrepancies rather than silently
   overwriting them. Never commits on its own.
-- `.claude-plugin/plugin.json` plugin manifest, so ccbstack can be installed
-  as a Claude Code plugin in other repositories.
+- `.claude-plugin/plugin.json` plugin manifest and `.claude-plugin/marketplace.json`
+  catalog (self-referencing via `"source": "./"`), so ccbstack can be
+  installed as a Claude Code plugin directly from a local clone via
+  `/plugin marketplace add` + `/plugin install`, with no separate hosting or
+  publishing required.
 - `docs/design/01_init-repo.md` and `docs/design/02_adopt-repo.md` design
   documents.
 - `docs/examples/ai_instructions/` reference `CLAUDE.md` examples used to

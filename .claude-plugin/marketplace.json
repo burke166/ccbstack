@@ -1,0 +1,14 @@
+{
+  "name": "ccbstack",
+  "owner": {
+    "name": "Christopher Burke",
+    "email": "chris@computercodeblue.com"
+  },
+  "plugins": [
+    {
+      "name": "ccbstack",
+      "source": "./",
+      "description": "Reusable Claude Code skills for a consistent, design-first software development workflow across repositories, languages, and project types."
+    }
+  ]
+}

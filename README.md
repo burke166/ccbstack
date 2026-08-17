@@ -43,6 +43,9 @@ ccbstack/
 ├── README.md
 ├── CHANGELOG.md
 ├── .gitignore
+├── .claude-plugin/
+│   ├── plugin.json
+│   └── marketplace.json
 ├── docs/
 │   └── design/
 └── skills/
@@ -61,6 +64,28 @@ Skills may include supporting reference material, templates, scripts, or other r
 Contains design documents for skills and other significant ccbstack features.
 
 Non-trivial functionality should be designed and reviewed before implementation.
+
+### `.claude-plugin/`
+
+Contains the plugin manifest (`plugin.json`) and marketplace catalog
+(`marketplace.json`) that let ccbstack be installed as a Claude Code plugin —
+see [Installation](#installation) below.
+
+## Installation
+
+ccbstack is distributed as a Claude Code plugin. `marketplace.json` points
+back at this same repository, so no separate hosting or publishing is
+required — install directly from a local clone:
+
+```text
+/plugin marketplace add /path/to/ccbstack
+/plugin install ccbstack@ccbstack
+```
+
+If the install summary says `Run /reload-plugins to activate.`, run that too.
+Choosing the `user` install scope makes `init-repo`/`adopt-repo` available
+across all of your repositories; `project`/`local` scope ties them to a
+single repository.
 
 ## Repository Workflow
 
