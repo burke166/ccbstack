@@ -1,6 +1,6 @@
 # 01 — `init-repo`
 
-Status: Accepted
+Status: Implemented
 
 ## Problem
 

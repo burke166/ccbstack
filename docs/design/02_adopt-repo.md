@@ -1,6 +1,6 @@
 # 02 — `adopt-repo`
 
-Status: Accepted
+Status: Implemented
 
 ## Problem
 
