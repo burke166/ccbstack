@@ -30,5 +30,9 @@ All notable changes to this project are documented here. The format follows
   used by both `init-repo` and `adopt-repo` when generating a project's
   `CLAUDE.md`, so the design-first section covers when a design document is
   required, its Proposed → Accepted → Implemented lifecycle, and its
-  standard structure, instead of a one-line mention.
+  standard structure, instead of a one-line mention. Verified by manually
+  walking both skills' `SKILL.md` workflows against disposable test
+  repositories (a Go module for `adopt-repo`, a static HTML5 scaffold for
+  `init-repo`) and confirming each generated `CLAUDE.md` adapted the shared
+  guidance to that project rather than copying it verbatim.
 - `docs/design/03_shared-design-doc-guidance.md` design document.
