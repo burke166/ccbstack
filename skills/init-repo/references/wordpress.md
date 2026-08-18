@@ -92,12 +92,19 @@ Cover, as relevant:
   theme's text domain consistently for i18n (`__()`, `_e()`).
 * **Build commands**, if a JS/CSS pipeline exists — e.g. `npm run build`,
   `npm run start` for `@wordpress/scripts`.
-* **Security** — never trust `$_GET`/`$_POST`/`$_REQUEST` without
-  sanitizing; use nonces for form submissions; never hardcode credentials.
+* **WordPress-specific security** — never trust `$_GET`/`$_POST`/`$_REQUEST`
+  without sanitizing; use nonces for form submissions (the general
+  never-hardcode-credentials baseline comes from
+  `skills/references/engineering-values.md`).
 * **Dependencies** — minimize plugins/libraries the theme assumes exist;
-  document any hard plugin dependency explicitly.
-* **Design-first workflow** — design docs for significant changes live in
-  `docs/design/`, status Proposed → Accepted → Implemented.
+  document any hard plugin dependency explicitly (see
+  `skills/references/engineering-values.md` for the general
+  before-adding-a-package checklist).
+* **Design-first workflow** — see `skills/references/design-docs.md`.
+
+Git and code-documentation guidance also come from
+`skills/references/engineering-values.md`, loaded and adapted regardless of
+family — no need to restate them here.
 
 ## Validation
 

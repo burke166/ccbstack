@@ -110,11 +110,23 @@ required, the Proposed → Accepted → Implemented lifecycle, and the standard
 document structure — into the generated `CLAUDE.md`, rather than reducing it
 to a one-line mention.
 
+Also load `skills/references/engineering-values.md` (shared with
+`init-repo`) and adapt its Security, Dependencies, Git, Documentation, and
+Technology-Stack guidance — this applies regardless of family. If step 3's
+inspection shows the project actually talks to an external/remote system (a
+network API, cloud service, SMTP server, subprocess, etc.) or has
+meaningful runtime configuration or logging, also load
+`skills/references/external-integrations.md` and adapt its Automation,
+Integration Testing, Logging, and Configuration guidance to what was
+actually found — not guessed. Skip it entirely for a project with no such
+dependency, the way it would be absent from a dependency-free utility
+library.
+
 If a `CLAUDE.md` already exists, *improve* it rather than replace it — see
-"Improving an existing CLAUDE.md" below. If it already has a design-first
-section, treat a thin one-line mention as a gap to fill using
-`skills/references/design-docs.md`, following the same "fill in gaps, don't
-reorganize intentional content" rule as any other section.
+"Improving an existing CLAUDE.md" below. Treat a thin one-line mention, or a
+missing section, as a gap to fill using the appropriate shared reference
+above, following the same "fill in gaps, don't reorganize intentional
+content" rule as any other section.
 
 ### 8. Create missing `README.md`/`CHANGELOG.md`
 

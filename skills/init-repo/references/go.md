@@ -64,11 +64,14 @@ Cover, as relevant:
 * **Build/test/lint commands** — `go build ./...`, `go test ./...`,
   `go vet ./...`.
 * **Testing expectations** — table-driven tests, testing observable behavior.
-* **Security** — never hardcode secrets/tokens; validate external input.
-* **Dependencies** — minimize third-party modules; prefer the standard
-  library when sufficient.
-* **Design-first workflow** — design docs for significant changes live in
-  `docs/design/`, status Proposed → Accepted → Implemented.
+* **Dependencies** — prefer the standard library when sufficient (see
+  `skills/references/engineering-values.md` for the general
+  before-adding-a-package checklist).
+* **Design-first workflow** — see `skills/references/design-docs.md`.
+
+Security, Git, and code-documentation guidance come from
+`skills/references/engineering-values.md`, loaded and adapted regardless of
+family — no need to restate them here.
 
 ## Validation
 

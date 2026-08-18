@@ -92,14 +92,14 @@ structure, not content). Cover, as relevant:
   `dotnet run --project <Name>`.
 * **Testing expectations** — regression tests for bug fixes, testing observed
   behavior rather than implementation details.
-* **Security** — never hardcode secrets/connection strings/API keys; treat
-  external input as untrusted.
-* **Dependencies** — minimize third-party packages; prefer Microsoft/BCL
-  libraries when sufficient.
-* **Git practices** — focused commits, no mixing formatting with functional
-  changes.
-* **Design-first workflow** — design docs for significant changes live in
-  `docs/design/`, status Proposed → Accepted → Implemented.
+* **Dependencies** — prefer Microsoft/BCL libraries when sufficient (see
+  `skills/references/engineering-values.md` for the general
+  before-adding-a-package checklist).
+* **Design-first workflow** — see `skills/references/design-docs.md`.
+
+Security, Git, and code-documentation guidance come from
+`skills/references/engineering-values.md`, loaded and adapted regardless of
+family — no need to restate them here.
 
 ## Validation
 

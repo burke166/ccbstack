@@ -116,6 +116,19 @@ required, the Proposed → Accepted → Implemented lifecycle, and the standard
 document structure — into the generated `CLAUDE.md`, rather than reducing it to
 a one-line mention.
 
+Also load `skills/references/engineering-values.md` (shared with
+`adopt-repo`) and adapt its Security, Dependencies, Git, Documentation, and
+Technology-Stack guidance — this applies regardless of family. If the
+project actually talks to an external/remote system (a network API, cloud
+service, SMTP server, subprocess, etc.) or has meaningful runtime
+configuration or logging, also load
+`skills/references/external-integrations.md` and adapt its Automation,
+Integration Testing, Logging, and Configuration guidance to that project's
+specific dependency — determined from the family and the answers gathered
+in steps 2–3, not guessed. Skip it entirely for a project with no such
+dependency (e.g. a static HTML5 site with no serverless component, or a
+dependency-free library).
+
 Use the facts gathered in steps 2–3, plus `references/<family>.md`'s "CLAUDE.md
 guidance" section for what that stack's build/test commands and conventions
 normally look like. If real, previously written `CLAUDE.md` examples are

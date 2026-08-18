@@ -64,8 +64,11 @@ Cover, as relevant:
   otherwise note "modern evergreen browsers" as the default assumption.
 * **Dependencies** — keep at zero unless the user explicitly adds
   something; justify any addition.
-* **Design-first workflow** — design docs for significant changes live in
-  `docs/design/`, status Proposed → Accepted → Implemented.
+* **Design-first workflow** — see `skills/references/design-docs.md`.
+
+Security, Git, and code-documentation guidance come from
+`skills/references/engineering-values.md`, loaded and adapted regardless of
+family — no need to restate them here.
 
 ## Validation
 

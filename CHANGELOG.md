@@ -36,3 +36,23 @@ All notable changes to this project are documented here. The format follows
   `init-repo`) and confirming each generated `CLAUDE.md` adapted the shared
   guidance to that project rather than copying it verbatim.
 - `docs/design/03_shared-design-doc-guidance.md` design document.
+- `skills/references/engineering-values.md`: shared Security, Dependencies,
+  Git, code-level Documentation, and Technology-Stack guidance used by both
+  `init-repo` and `adopt-repo` for every generated `CLAUDE.md`, regardless
+  of family. Deliberately narrow — scoped to content that changes a
+  specific decision per project, excluding generic engineering-values
+  boilerplate (design philosophy, coding style, refactoring, performance,
+  project priorities) that doesn't.
+- `skills/references/external-integrations.md`: shared Automation,
+  Integration Testing, Logging, and Configuration guidance, loaded only
+  when a project actually talks to an external/remote system or has
+  meaningful runtime configuration/logging. Teaches Integration Testing as
+  a pattern to apply to a project's own external dependency rather than a
+  fixed example list.
+- `skills/init-repo/references/*.md` and (where duplicative)
+  `skills/adopt-repo/references/*.md`: per-family `CLAUDE.md guidance`
+  sections trimmed of Security/Dependencies/Git bullets now covered by
+  `skills/references/engineering-values.md`, keeping only genuinely
+  family-specific content (e.g. WordPress's `$_GET`/`$_POST` sanitization
+  guidance, Go's standard-library preference).
+- `docs/design/04_shared-claude-md-sections.md` design document.

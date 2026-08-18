@@ -72,8 +72,11 @@ Cover, as relevant:
 * **Avoid scope creep** — do not turn the site into a web application when
   static HTML can solve the problem; do not add a JS framework (React, Vue,
   Svelte) unless there's a compelling requirement Hugo and CSS can't satisfy.
-* **Design-first workflow** — design docs for significant changes live in
-  `docs/design/`, status Proposed → Accepted → Implemented.
+* **Design-first workflow** — see `skills/references/design-docs.md`.
+
+Security, Dependencies, Git, and code-documentation guidance come from
+`skills/references/engineering-values.md`, loaded and adapted regardless of
+family — no need to restate them here.
 
 ## Validation
 
