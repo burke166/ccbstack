@@ -49,6 +49,7 @@ ccbstack/
 ├── docs/
 │   └── design/
 └── skills/
+    ├── references/
     ├── init-repo/
     └── adopt-repo/
 ```
@@ -58,6 +59,8 @@ ccbstack/
 Contains reusable Claude Code skills.
 
 Skills may include supporting reference material, templates, scripts, or other resources when needed.
+
+`skills/references/` holds resources shared across multiple skills (currently, design-doc workflow guidance used by both `init-repo` and `adopt-repo`) — distinct from each skill's own `references/` directory, which is scoped to that skill alone.
 
 ### `docs/design/`
 

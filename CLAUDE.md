@@ -381,6 +381,7 @@ ccbstack/
 ├── docs/
 │   └── design/
 └── skills/
+    ├── references/
     ├── init-repo/
     └── adopt-repo/
 ```

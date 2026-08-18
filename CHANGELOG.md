@@ -26,3 +26,9 @@ All notable changes to this project are documented here. The format follows
   documents.
 - `docs/examples/ai_instructions/` reference `CLAUDE.md` examples used to
   calibrate the documentation both skills generate.
+- `skills/references/design-docs.md`: shared design-doc workflow guidance
+  used by both `init-repo` and `adopt-repo` when generating a project's
+  `CLAUDE.md`, so the design-first section covers when a design document is
+  required, its Proposed → Accepted → Implemented lifecycle, and its
+  standard structure, instead of a one-line mention.
+- `docs/design/03_shared-design-doc-guidance.md` design document.

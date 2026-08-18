@@ -108,8 +108,13 @@ ccbstack's own `CLAUDE.md`. Cover only what's relevant: project purpose, languag
 and framework, architecture, important dependencies, build/test commands,
 development principles, repository conventions, documentation expectations, Git
 practices, testing expectations, project-specific constraints, and the
-design-first workflow (design docs live in `docs/design/`, status
-Proposed → Accepted → Implemented, per ccbstack's own convention).
+design-first workflow.
+
+For the design-first workflow section, load `skills/references/design-docs.md`
+(shared with `adopt-repo`) and adapt its guidance — when a design document is
+required, the Proposed → Accepted → Implemented lifecycle, and the standard
+document structure — into the generated `CLAUDE.md`, rather than reducing it to
+a one-line mention.
 
 Use the facts gathered in steps 2–3, plus `references/<family>.md`'s "CLAUDE.md
 guidance" section for what that stack's build/test commands and conventions

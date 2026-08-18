@@ -104,8 +104,17 @@ project-specific constraints, and the design-first workflow — grounded in
 what step 3 actually found, not fresh choices. Use `references/<family>.md`'s
 "CLAUDE.md guidance" section for what that stack's document normally covers.
 
+For the design-first workflow section, load `skills/references/design-docs.md`
+(shared with `init-repo`) and adapt its guidance — when a design document is
+required, the Proposed → Accepted → Implemented lifecycle, and the standard
+document structure — into the generated `CLAUDE.md`, rather than reducing it
+to a one-line mention.
+
 If a `CLAUDE.md` already exists, *improve* it rather than replace it — see
-"Improving an existing CLAUDE.md" below.
+"Improving an existing CLAUDE.md" below. If it already has a design-first
+section, treat a thin one-line mention as a gap to fill using
+`skills/references/design-docs.md`, following the same "fill in gaps, don't
+reorganize intentional content" rule as any other section.
 
 ### 8. Create missing `README.md`/`CHANGELOG.md`
 
