@@ -56,3 +56,20 @@ All notable changes to this project are documented here. The format follows
   family-specific content (e.g. WordPress's `$_GET`/`$_POST` sanitization
   guidance, Go's standard-library preference).
 - `docs/design/04_shared-claude-md-sections.md` design document.
+- `init-repo`: a new "Determine project intent" step (between location and
+  family selection) that asks the user directly for a short description of
+  what the project is and who/what it's for, matching the "project intent"
+  stage ccbstack's own root `CLAUDE.md` already described but that wasn't
+  previously implemented as a step. The generated `CLAUDE.md`'s purpose
+  section now uses this answer verbatim instead of having no defined
+  source.
+- `adopt-repo`: a new "Draft and confirm the project's purpose" step
+  (between inspection and family matching) that drafts a purpose paragraph
+  from inspection and iterates on it with the user — incorporating their
+  feedback and re-presenting — until they confirm it's accurate, rather
+  than asking them to rewrite it themselves or silently trusting a
+  possibly-wrong inference. Scoped to the purpose section only; the rest of
+  the generated `CLAUDE.md` is still reviewed via `git diff` as before.
+  Falls back to asking the user directly when inspection finds no evidence
+  to draft from.
+- `docs/design/05_project-purpose-section.md` design document.

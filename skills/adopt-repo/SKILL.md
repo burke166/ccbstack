@@ -18,7 +18,7 @@ user.
 
 ## Reference table
 
-Once the project family is identified (step 4), load the matching reference
+Once the project family is identified (step 5), load the matching reference
 file for detection signals, `.gitignore` content, `CLAUDE.md` guidance, and a
 safe verification command. These are **adoption**-focused references, not
 `init-repo`'s scaffolding-focused ones of the same name — do not substitute
@@ -69,7 +69,47 @@ Do not write anything in this step. This is the step that makes the rest of
 the workflow safe — everything downstream depends on what's actually found
 here, not on assumptions.
 
-### 4. Match against a project family, and confirm rather than guess
+### 4. Draft and confirm the project's purpose
+
+Unlike the rest of this skill's generated content, a purpose paragraph is
+interpretive, not objectively checkable against the repository the way a
+build command or a detected dependency is — easy to get subtly wrong, and
+easy for a human to skim past unnoticed in a `git diff`. Settle it
+explicitly, before anything else is written, rather than folding it silently
+into step 8's `CLAUDE.md` generation:
+
+1. Using what step 3's inspection found (README, package manifests, doc
+   comments, code structure, an existing `CLAUDE.md` if present), draft a
+   short description of what the repository is, who or what it's for, and —
+   if it's evident — what it deliberately doesn't do.
+2. Present the draft to the user in plain conversation (not
+   `AskUserQuestion` — this is open-ended prose, not a choice among options)
+   and ask whether it's accurate.
+3. If the user proposes a change, revise the draft to incorporate their
+   feedback and present it again. They should only ever need to describe
+   what to change, not restate what's already right or rewrite the whole
+   thing themselves.
+4. Repeat steps 2–3 until the user affirmatively confirms the draft is
+   accurate. There's no fixed iteration limit — continue until they say so.
+5. Carry the confirmed text forward, unedited, into step 8.
+
+This loop is scoped to the purpose section only — it is not a general
+mechanism for reviewing the rest of the generated `CLAUDE.md`, which is
+still reviewed the normal way, via `git diff`, once written.
+
+**If inspection found nothing to draft from** (no README, no
+package-manifest description, nothing in the code that makes intent
+evident), say so plainly and ask the user directly instead of presenting a
+fabricated guess as a draft to react to — that would violate "do not invent
+facts" just as much as silently writing one into `CLAUDE.md` would.
+
+**If a `CLAUDE.md` already exists** with a purpose section that's clearly
+intentional, leave it alone and skip this step for that section, per
+"Improving an existing `CLAUDE.md`" below — don't run the loop on something
+already stated. Run it only when the section is missing or thin enough to
+be a gap (e.g. just the repository name restated).
+
+### 5. Match against a project family, and confirm rather than guess
 
 Compare what step 3 found against the six families in the reference table,
 using each `references/<family>.md`'s "Detection signals" section, plus
@@ -79,14 +119,14 @@ confirmation. Unlike `init-repo`, which has no evidence and must ask cold,
 `adopt-repo` has real signal to present — confirm it rather than silently
 acting on a guess, and correct the detection if the user says it's wrong.
 
-### 5. Create or improve `.gitignore`
+### 6. Create or improve `.gitignore`
 
 If missing, create one from the confirmed family's typical entries (per
 `references/<family>.md`). If present, merge in missing stack-appropriate
 entries without touching existing custom entries, and report exactly what was
 added. Never overwrite an existing `.gitignore`.
 
-### 6. Create `docs/design/` if missing
+### 7. Create `docs/design/` if missing
 
 Seed it with a short `docs/design/README.md` pointing back at `CLAUDE.md`'s
 design-first workflow. Git does not track empty directories — creating an
@@ -94,7 +134,7 @@ empty `docs/design/` would silently vanish the moment anything is committed,
 so always seed it with a real file. If `docs/design/` already exists (with or
 without documents in it), leave it untouched.
 
-### 7. Create or improve `CLAUDE.md`
+### 8. Create or improve `CLAUDE.md`
 
 If none exists, generate one using the same content checklist `init-repo`
 uses — purpose, language/framework, architecture, important dependencies,
@@ -103,6 +143,9 @@ documentation expectations, Git practices, testing expectations,
 project-specific constraints, and the design-first workflow — grounded in
 what step 3 actually found, not fresh choices. Use `references/<family>.md`'s
 "CLAUDE.md guidance" section for what that stack's document normally covers.
+
+Use the purpose text confirmed in step 4, unedited, as the opening
+description.
 
 For the design-first workflow section, load `skills/references/design-docs.md`
 (shared with `init-repo`) and adapt its guidance — when a design document is
@@ -128,7 +171,7 @@ missing section, as a gap to fill using the appropriate shared reference
 above, following the same "fill in gaps, don't reorganize intentional
 content" rule as any other section.
 
-### 8. Create missing `README.md`/`CHANGELOG.md`
+### 9. Create missing `README.md`/`CHANGELOG.md`
 
 Only if genuinely absent. Write a minimal, project-specific version the same
 way `init-repo` does (a README describing what the project is and how to
@@ -137,7 +180,7 @@ Changelog](https://keepachangelog.com/) format). Never rewrite an existing
 `README.md` or `CHANGELOG.md` uninvited — at most, note in the final report if
 either looks significantly out of date relative to what step 3 found.
 
-### 9. Verify where it's quick and safe
+### 10. Verify where it's quick and safe
 
 Run the build/test command recorded in the (new or updated) `CLAUDE.md`,
 using `references/<family>.md`'s verification command, if doing so is fast
@@ -147,7 +190,7 @@ isn't safe or practical to run automatically — it needs infrastructure,
 credentials, or a long-running process — say so explicitly in the report
 instead of silently skipping it.
 
-### 10. Report
+### 11. Report
 
 Summarize, file by file: what was created, what was changed and why, and what
 was found but intentionally left alone. **Do not stage or commit anything** —
@@ -162,9 +205,13 @@ wrong, so follow these rules explicitly:
 
 * Treat a section that already states a clear decision as intentional — leave
   it, even if `init-repo` would have chosen differently for a new project.
+  For the purpose section specifically, this means skipping step 4's
+  draft/review loop entirely rather than re-litigating something already
+  stated.
 * Treat a section that is entirely absent, where inspection found an
   unambiguous fact (e.g. no "Build" section, but a `Makefile` with an obvious
-  `build` target), as a gap — fill it in.
+  `build` target), as a gap — fill it in. For the purpose section, this
+  means running step 4's draft/review loop.
 * Treat a section that appears to contradict what inspection found (e.g.
   `CLAUDE.md` says "no external dependencies" but a lockfile lists a dozen) as
   a discrepancy — do not silently resolve it in either direction. Flag it in
@@ -176,7 +223,7 @@ wrong, so follow these rules explicitly:
 
 An adopted repository may genuinely span more than one family (e.g. a Go
 backend with a Svelte frontend) — unlike a freshly scaffolded `init-repo`
-project, which is always exactly one. Step 4 should surface every family it
+project, which is always exactly one. Step 5 should surface every family it
 detects, not force a single choice. The resulting `CLAUDE.md` should document
 each detected part of the repository (its own build/test commands,
 conventions) rather than assuming one language describes the whole project.
@@ -185,14 +232,15 @@ what's actually there.
 
 ## Other/generic family
 
-If nothing in step 4 matches a known family (or the user says none apply),
+If nothing in step 5 matches a known family (or the user says none apply),
 skip family-specific `.gitignore`/verification guidance. Still run every
-other step: Git init if absent, a minimal `.gitignore` merge (OS/editor noise
-only — `.DS_Store`, `Thumbs.db`, editor swap files — plus anything obviously
-implied by what step 3 found), `docs/design/`, a `CLAUDE.md` built from
-whatever step 3 actually discovered, and missing `README.md`/`CHANGELOG.md`.
-There is no family-specific verification command; note in the report that
-build/test verification wasn't performed and why.
+other step: Git init if absent, the purpose draft/review loop, a minimal
+`.gitignore` merge (OS/editor noise only — `.DS_Store`, `Thumbs.db`, editor
+swap files — plus anything obviously implied by what step 3 found),
+`docs/design/`, a `CLAUDE.md` built from whatever step 3 actually
+discovered, and missing `README.md`/`CHANGELOG.md`. There is no
+family-specific verification command; note in the report that build/test
+verification wasn't performed and why.
 
 ## Failure and edge cases
 
@@ -204,6 +252,8 @@ build/test verification wasn't performed and why.
   inspection actually established.
 * **Existing `CLAUDE.md` contradicts what inspection found** — flag it per
   "Improving an existing `CLAUDE.md`" above; never silently overwrite.
+* **Inspection finds nothing to draft a purpose section from** — ask the
+  user directly per step 4, rather than presenting a fabricated guess.
 * **Verification would require credentials, infrastructure, or is
   long-running** — skip it and say so explicitly in the report; do not
   attempt it anyway.
