@@ -70,6 +70,14 @@ All notable changes to this project are documented here. The format follows
   than asking them to rewrite it themselves or silently trusting a
   possibly-wrong inference. Scoped to the purpose section only; the rest of
   the generated `CLAUDE.md` is still reviewed via `git diff` as before.
+- `init-repo`'s C#/.NET reference (`skills/init-repo/references/dotnet.md`):
+  a standard `src/`/`tests/`/`<RepoName>.slnx` layout for every .NET
+  scaffold, regardless of project type or count — application code under
+  `src/<ProjectName>/`, a corresponding xUnit `tests/<ProjectName>.Tests/`
+  project referencing it, and a root `.slnx` (the XML solution format)
+  referencing every project. Replaces the previous default of scaffolding
+  a single project at the repository root with no test project. Prompted
+  by restructuring an already-scaffolded project this way after the fact.
   Falls back to asking the user directly when inspection finds no evidence
   to draft from.
 - `docs/design/05_project-purpose-section.md` design document.
